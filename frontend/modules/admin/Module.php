@@ -1,13 +1,13 @@
 <?php
 
-namespace frontend\modules\user;
+namespace frontend\modules\admin;
 
 class Module extends \yii\base\Module
 {
     /**
      * @var string
      */
-    public $controllerNamespace = 'frontend\modules\user\controllers';
+    public $controllerNamespace = 'frontend\modules\admin\controllers';
 
     /**
      * @var bool Is users should be activated by email

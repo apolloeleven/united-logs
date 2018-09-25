@@ -8,8 +8,17 @@ $config = [
         'user' => [
             'class' => frontend\modules\user\Module::class,
             'shouldBeActivated' => false,
-            'enableLoginByPass' => false,
         ],
+        'admin' => [
+            'class' => 'frontend\modules\admin\Module',
+            //'shouldBeActivated' => true
+        ],
+        'api' => [
+            'class' => 'frontend\modules\api\Module',
+            'modules' => [
+                'v1' => 'frontend\modules\api\v1\Module'
+            ]
+        ]
     ],
     'components' => [
         'authClientCollection' => [
