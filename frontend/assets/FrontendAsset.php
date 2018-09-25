@@ -21,19 +21,30 @@ class FrontendAsset extends AssetBundle
      * @var string
      */
     public $sourcePath = '@frontend/web/bundle';
-
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
     /**
      * @var array
      */
     public $css = [
-        'style.css',
+        'css/lobiadmin-with-plugins.css',
+        'css/style.css',
+        'css/bootstrap-tour.min.css',
     ];
 
     /**
      * @var array
      */
     public $js = [
-        'app.js',
+        'js/lobiplugins/lobibox.js',
+        'js/highlight.pack.js',
+        'js/config.js',
+        'js/lobiadmin.js',
+        'js/lobiadmin-app.js',
+        'js/mark.js',
+        'js/app.js',
+        'js/bootstrap-tour.min.js',
+        'js/jstree.min.js',
     ];
 
     /**
@@ -43,5 +54,9 @@ class FrontendAsset extends AssetBundle
         YiiAsset::class,
         BootstrapAsset::class,
         Html5shiv::class,
+        'yii\web\JqueryAsset',
+        'yii\jui\JuiAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'common\assets\FontAwesome',
     ];
 }
