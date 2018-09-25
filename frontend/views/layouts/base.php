@@ -1,71 +1,43 @@
 <?php
-
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
+use frontend\assets\FrontendAsset;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-$this->beginContent('@frontend/views/layouts/_clear.php')
+$bundle = FrontendAsset::register($this);
+
+$this->params['body-class'] = array_key_exists('body-class', $this->params) ?
+    $this->params['body-class']
+    : null;
 ?>
-    <div class="wrap">
-        <?php
-        NavBar::begin([
-            'brandLabel' => Yii::$app->name,
-            'brandUrl' => Yii::$app->homeUrl,
-            'options' => [
-                'class' => 'navbar-inverse navbar-fixed-top',
-            ],
-        ]); ?>
-        <?php echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => [
-                ['label' => Yii::t('frontend', 'Home'), 'url' => ['/site/index']],
-                ['label' => Yii::t('frontend', 'Project'), 'url' => ['/admin/project/index'], 'visible' => !Yii::$app->user->isGuest],
-                ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
-                ['label' => Yii::t('frontend', 'Login'), 'url' => ['/user/sign-in/login'], 'visible'=>Yii::$app->user->isGuest],
-                [
-                    'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity(),
-                    'visible'=>!Yii::$app->user->isGuest,
-                    'items'=>[
-                        [
-                            'label' => Yii::t('frontend', 'Settings'),
-                            'url' => ['/user/default/index']
-                        ],
-                        [
-                            'label' => Yii::t('frontend', 'Backend'),
-                            'url' => Yii::getAlias('@backendUrl'),
-                            'visible'=>Yii::$app->user->can('manager')
-                        ],
-                        [
-                            'label' => Yii::t('frontend', 'Logout'),
-                            'url' => ['/user/sign-in/logout'],
-                            'linkOptions' => ['data-method' => 'post']
-                        ]
-                    ]
-                ],
-//            [
-//                'label'=>Yii::t('frontend', 'Language'),
-//                'items'=>array_map(function ($code) {
-//                    return [
-//                        'label' => Yii::$app->params['availableLocales'][$code],
-//                        'url' => ['/site/set-locale', 'locale'=>$code],
-//                        'active' => Yii::$app->language === $code
-//                    ];
-//                }, array_keys(Yii::$app->params['availableLocales']))
-//            ]
-            ]
-        ]); ?>
-        <?php NavBar::end(); ?>
 
+<?php $this->beginPage() ?>
+<!DOCTYPE html>
+<html lang="<?php echo Yii::$app->language ?>">
+<head>
+    <meta charset="<?php echo Yii::$app->charset ?>">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+    <?php echo Html::csrfMetaTags() ?>
+    <title><?php echo Html::encode($this->title) ?></title>
+    <?php $this->head() ?>
+
+</head>
+<?php echo Html::beginTag('body', [
+    'class' => implode(' ', [
+        ArrayHelper::getValue($this->params, 'body-class'),
+        Yii::$app->keyStorage->get('backend.theme-skin', ''),
+        Yii::$app->keyStorage->get('backend.header-fixed') ? 'header-fixed' : null,
+        Yii::$app->keyStorage->get('backend.menu-fixed') ? 'menu-fixed' : null,
+        Yii::$app->keyStorage->get('backend.ribbon-fixed') ? 'ribbon-fixed' : null,
+    ]),
+    'style' => ArrayHelper::getValue($this->params, 'body-style'),
+])?>
+    <?php $this->beginBody() ?>
         <?php echo $content ?>
-
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; My Company <?php echo date('Y') ?></p>
-            <p class="pull-right"><?php echo Yii::powered() ?></p>
-        </div>
-    </footer>
-<?php $this->endContent() ?>
+    <?php $this->endBody() ?>
+<?php echo Html::endTag('body') ?>
+</html>
+<?php $this->endPage() ?>
