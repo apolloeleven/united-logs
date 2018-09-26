@@ -39,12 +39,14 @@ $bundle = FrontendAsset::register($this);
             <!--User avatar dropdown-->
             <ul class="nav navbar-nav navbar-right user-actions">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?php echo Yii::$app->user->identity->userProfile->getAvatar($this->assetManager->getAssetUrl($bundle,
-                            'img/anonymous.jpg')) ?>"
-                             class="user-avatar">
-                        <span><?php echo Yii::$app->user->identity->username ?> <i class="caret"></i></span>
-                    </a>
+                    <?php if (Yii::$app->user->identity): ?>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="<?php echo Yii::$app->user->identity->userProfile->getAvatar($this->assetManager->getAssetUrl($bundle,
+                                'img/anonymous.jpg')) ?>"
+                                 class="user-avatar">
+                            <span><?php echo Yii::$app->user->identity->username ?> <i class="caret"></i></span>
+                        </a>
+                    <?php endif; ?>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo Url::to(['/sign-in/profile']) ?>"><span
                                         class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Profile</a>
@@ -52,17 +54,11 @@ $bundle = FrontendAsset::register($this);
                         <li><a href="<?php echo Url::to(['/sign-in/account']) ?>"><span
                                         class="fa fa-key"></span> &nbsp;&nbsp;Account</a>
                         </li>
-                        <li><a href="<?php echo Url::to(['/timeline-event/index']) ?>"><i class="fa fa-code-fork"></i>
-                                &nbsp;&nbsp;Timeline</a></li>
-                        <!--                        <li><a href="#lobimail"><span class="glyphicon glyphicon-envelope"></span> &nbsp;&nbsp;Messages</a></li>-->
                         <li class="divider"></li>
-                        <li><a href="<?php echo Url::to(['/sign-in/lock']) ?>" data-method="post">
-                                <span class="glyphicon glyphicon-lock"></span> &nbsp;&nbsp;Lock screen</a></li>
-                        <li>
-                            <a href="<?php echo Url::to(['/sign-in/logout']) ?>" data-method="post">
-                                <span class="glyphicon glyphicon-off"></span>
-                                &nbsp;&nbsp;<?php echo Yii::t('backend', 'Log out') ?>
-                            </a>
+                        <a href="<?php echo Url::to(['user/sign-in/logout']) ?>" data-method="post">
+                            <span class="glyphicon glyphicon-off"></span>
+                            &nbsp;&nbsp;<?php echo Yii::t('backend', 'Log out') ?>
+                        </a>
                         </li>
                     </ul>
                 </li>
@@ -102,7 +98,7 @@ $bundle = FrontendAsset::register($this);
                         'url' => ['/admin/project/index'],
                         'icon' => 'fa fa-edit'
                     ],
-                    ]
+                ]
             ]);
             ?>
         </nav>
@@ -113,18 +109,18 @@ $bundle = FrontendAsset::register($this);
     </div>
 
     <div id="main">
-        <div id="ribbon" class="hidden-print">
-            <a href="#dashboard" class="btn-ribbon" data-container="#main" data-toggle="tooltip"
-               data-title="Show dashboard"><i class="fa fa-home"></i></a>
-            <span class="vertical-devider">&nbsp;</span>
-            <button class="btn-ribbon" data-container="#main" data-action="reload" data-toggle="tooltip"
-                    data-title="Reload content by ajax"><i class="fa fa-refresh"></i></button>
-            <?php echo Breadcrumbs::widget([
-                'homeLink' => false,
-                'tag' => 'ol',
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-        </div>
+        <!--        <div id="ribbon" class="hidden-print">-->
+        <!--            <a href="#dashboard" class="btn-ribbon" data-container="#main" data-toggle="tooltip"-->
+        <!--               data-title="Show dashboard"><i class="fa fa-home"></i></a>-->
+        <!--            <span class="vertical-devider">&nbsp;</span>-->
+        <!--            <button class="btn-ribbon" data-container="#main" data-action="reload" data-toggle="tooltip"-->
+        <!--                    data-title="Reload content by ajax"><i class="fa fa-refresh"></i></button>-->
+        <!--            --><?php //echo Breadcrumbs::widget([
+        //                'homeLink' => false,
+        //                'tag' => 'ol',
+        //                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        //            ]) ?>
+        <!--        </div>-->
         <div id="content">
             <h1>
                 <?php echo $this->title ?>

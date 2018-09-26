@@ -1,6 +1,6 @@
 <?php
 
-use centigen\base\widgets\GridView;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
@@ -15,7 +15,7 @@ use yii\widgets\Breadcrumbs;
 /* @var $projectLogEnvironments [] */
 
 
-$this->registerAssetBundle('centigen\i18ncontent\AssetBundle');
+//$this->registerAssetBundle('centigen\i18ncontent\AssetBundle');
 $this->title = Yii::t('frontend', 'Project Logs');
 echo Breadcrumbs::widget([
     'itemTemplate' => "<li><i>{link}</i></li>\n", // template for all links
@@ -38,16 +38,16 @@ echo Html::a(Yii::t('frontend', 'Delete'), [null], ['class' => 'btn btn-danger d
 <div class="project-log-index">
     <h2>Logs for project: <?= $project->name ?></h2>
     <?php echo GridView::widget([
-        'orderColumnName' => 'id',
+//        'orderColumnName' => 'id',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'class' => \centigen\base\grid\CheckboxColumn::className(),
-                'prefix' => '<div class="om-checkbox"><label>',
-                'suffix' => '<span class="om-checkbox-material"><span class="check"></span></span></label></div>',
-                'headerPrefix' => '<div class="om-checkbox"><label>',
-                'headerSuffix' => '</label></div>',
+//                'class' => \centigen\base\grid\CheckboxColumn::className(),
+//                'prefix' => '<div class="om-checkbox"><label>',
+//                'suffix' => '<span class="om-checkbox-material"><span class="check"></span></span></label></div>',
+//                'headerPrefix' => '<div class="om-checkbox"><label>',
+//                'headerSuffix' => '</label></div>',
                 'options' => [
                     'style' => 'width: 1px;',
                     'class' => 'text-center',

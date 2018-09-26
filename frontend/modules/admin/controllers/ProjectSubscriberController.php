@@ -2,7 +2,7 @@
 
 namespace frontend\modules\admin\controllers;
 
-use centigen\base\behaviors\AccessControl;
+use yii\filters\AccessControl;
 use common\models\Project;
 use common\models\ProjectLog;
 use Yii;
