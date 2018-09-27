@@ -10,10 +10,9 @@ $this->title = Yii::t('frontend', 'Login');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?php echo Html::encode($this->title) ?></h1>
 
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-4 col-lg-offset-4">
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
                 <?php echo $form->field($model, 'identity') ?>
                 <?php echo $form->field($model, 'password')->passwordInput() ?>
