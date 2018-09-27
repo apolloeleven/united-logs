@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         \yii\helpers\Url::to(['/admin/project-log/index', 'id' => $model->id]),
                         [
                             'class' => 'btn btn-primary',
-                            'style' => 'margin-bottom:4px'
+                            'style' => 'margin:4px'
                         ]
                     ).Html::a(
                             Yii::t('frontend', 'Subscribers'),
