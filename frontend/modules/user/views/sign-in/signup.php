@@ -10,7 +10,6 @@ $this->title = Yii::t('frontend', 'Signup');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signup">
-    <h1><?php echo Html::encode($this->title) ?></h1>
 
     <div class="row">
         <div class="col-lg-5">

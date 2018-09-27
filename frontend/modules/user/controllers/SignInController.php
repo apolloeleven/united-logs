@@ -5,6 +5,7 @@ namespace frontend\modules\user\controllers;
 use common\commands\SendEmailCommand;
 use common\models\User;
 use common\models\UserToken;
+use frontend\modules\user\models\AccountForm;
 use frontend\modules\user\models\LoginForm;
 use frontend\modules\user\models\PasswordResetRequestForm;
 use frontend\modules\user\models\ResetPasswordForm;
@@ -58,9 +59,10 @@ class SignInController extends \yii\web\Controller
                     ],
                     [
                         'actions' => [
-                            'signup', 'login', 'request-password-reset', 'reset-password', 'oauth', 'activation'
+                            'signup', 'login', 'request-password-reset', 'reset-password', 'oauth', 'activation',
+                            'profile', 'account'
                         ],
-                        'allow' => false,
+                        'allow' => true,
                         'roles' => ['@'],
                         'denyCallback' => function () {
                             return Yii::$app->controller->redirect(['/admin/project/index']);
@@ -127,7 +129,7 @@ class SignInController extends \yii\web\Controller
                             'frontend',
                             'Your account has been successfully created. Check your email for further instructions.'
                         ),
-                        'options' => ['class'=>'alert-success']
+                        'options' => ['class' => 'alert-success']
                     ]);
                 } else {
                     Yii::$app->getUser()->login($user);
@@ -161,7 +163,7 @@ class SignInController extends \yii\web\Controller
         Yii::$app->getUser()->login($user);
         Yii::$app->getSession()->setFlash('alert', [
             'body' => Yii::t('frontend', 'Your account has been successfully activated.'),
-            'options' => ['class'=>'alert-success']
+            'options' => ['class' => 'alert-success']
         ]);
 
         return $this->goHome();
@@ -176,15 +178,15 @@ class SignInController extends \yii\web\Controller
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
                 Yii::$app->getSession()->setFlash('alert', [
-                    'body'=>Yii::t('frontend', 'Check your email for further instructions.'),
-                    'options'=>['class'=>'alert-success']
+                    'body' => Yii::t('frontend', 'Check your email for further instructions.'),
+                    'options' => ['class' => 'alert-success']
                 ]);
 
                 return $this->goHome();
             } else {
                 Yii::$app->getSession()->setFlash('alert', [
-                    'body'=>Yii::t('frontend', 'Sorry, we are unable to reset password for email provided.'),
-                    'options'=>['class'=>'alert-danger']
+                    'body' => Yii::t('frontend', 'Sorry, we are unable to reset password for email provided.'),
+                    'options' => ['class' => 'alert-danger']
                 ]);
             }
         }
@@ -209,8 +211,8 @@ class SignInController extends \yii\web\Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
             Yii::$app->getSession()->setFlash('alert', [
-                'body'=> Yii::t('frontend', 'New password was saved.'),
-                'options'=>['class'=>'alert-success']
+                'body' => Yii::t('frontend', 'New password was saved.'),
+                'options' => ['class' => 'alert-success']
             ]);
             return $this->goHome();
         }
@@ -230,9 +232,9 @@ class SignInController extends \yii\web\Controller
         // use BaseClient::normalizeUserAttributeMap to provide consistency for user attribute`s names
         $attributes = $client->getUserAttributes();
         $user = User::find()->where([
-                'oauth_client'=>$client->getName(),
-                'oauth_client_user_id'=>ArrayHelper::getValue($attributes, 'id')
-            ])
+            'oauth_client' => $client->getName(),
+            'oauth_client_user_id' => ArrayHelper::getValue($attributes, 'id')
+        ])
             ->one();
         if (!$user) {
             $user = new User();
@@ -252,17 +254,17 @@ class SignInController extends \yii\web\Controller
                 $user->afterSignup($profileData);
                 $sentSuccess = Yii::$app->commandBus->handle(new SendEmailCommand([
                     'view' => 'oauth_welcome',
-                    'params' => ['user'=>$user, 'password'=>$password],
-                    'subject' => Yii::t('frontend', '{app-name} | Your login information', ['app-name'=>Yii::$app->name]),
+                    'params' => ['user' => $user, 'password' => $password],
+                    'subject' => Yii::t('frontend', '{app-name} | Your login information', ['app-name' => Yii::$app->name]),
                     'to' => $user->email
                 ]));
                 if ($sentSuccess) {
                     Yii::$app->session->setFlash(
                         'alert',
                         [
-                            'options'=>['class'=>'alert-success'],
-                            'body'=>Yii::t('frontend', 'Welcome to {app-name}. Email with your login information was sent to your email.', [
-                                'app-name'=>Yii::$app->name
+                            'options' => ['class' => 'alert-success'],
+                            'body' => Yii::t('frontend', 'Welcome to {app-name}. Email with your login information was sent to your email.', [
+                                'app-name' => Yii::$app->name
                             ])
                         ]
                     );
@@ -270,13 +272,13 @@ class SignInController extends \yii\web\Controller
 
             } else {
                 // We already have a user with this email. Do what you want in such case
-                if ($user->email && User::find()->where(['email'=>$user->email])->count()) {
+                if ($user->email && User::find()->where(['email' => $user->email])->count()) {
                     Yii::$app->session->setFlash(
                         'alert',
                         [
-                            'options'=>['class'=>'alert-danger'],
-                            'body'=>Yii::t('frontend', 'We already have a user with email {email}', [
-                                'email'=>$user->email
+                            'options' => ['class' => 'alert-danger'],
+                            'body' => Yii::t('frontend', 'We already have a user with email {email}', [
+                                'email' => $user->email
                             ])
                         ]
                     );
@@ -284,8 +286,8 @@ class SignInController extends \yii\web\Controller
                     Yii::$app->session->setFlash(
                         'alert',
                         [
-                            'options'=>['class'=>'alert-danger'],
-                            'body'=>Yii::t('frontend', 'Error while oauth process.')
+                            'options' => ['class' => 'alert-danger'],
+                            'body' => Yii::t('frontend', 'Error while oauth process.')
                         ]
                     );
                 }
@@ -297,5 +299,41 @@ class SignInController extends \yii\web\Controller
         } else {
             throw new Exception('OAuth error');
         }
+    }
+
+    public function actionProfile()
+    {
+        $model = Yii::$app->user->identity->userProfile;
+        if ($model->load($_POST) && $model->save()) {
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class' => 'alert-success'],
+                'body' => Yii::t('backend', 'Your profile has been successfully saved', [], $model->locale)
+            ]);
+            return $this->refresh();
+        }
+        return $this->render('profile', ['model' => $model]);
+
+    }
+
+    public function actionAccount()
+    {
+        $user = Yii::$app->user->identity;
+        $model = new AccountForm();
+        $model->username = $user->username;
+        $model->email = $user->email;
+        if ($model->load($_POST) && $model->validate()) {
+            $user->username = $model->username;
+            $user->email = $model->email;
+            if ($model->password) {
+                $user->setPassword($model->password);
+            }
+            $user->save();
+            Yii::$app->session->setFlash('alert', [
+                'options' => ['class' => 'alert-success'],
+                'body' => Yii::t('backend', 'Your account has been successfully saved')
+            ]);
+            return $this->refresh();
+        }
+        return $this->render('account', ['model' => $model]);
     }
 }

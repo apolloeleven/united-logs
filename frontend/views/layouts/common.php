@@ -46,18 +46,31 @@ $bundle = FrontendAsset::register($this);
                                  class="user-avatar">
                             <span><?php echo Yii::$app->user->identity->username ?> <i class="caret"></i></span>
                         </a>
+                    <?php else: ?>
+                    <li>
+                        <a href="<?php echo Url::to(['/user/sign-in/login']) ?>" data-method="post">
+                            <span class="glyphicon glyphicon-log-in"></span>
+                            &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Log in') ?>
+                        </a>
+                </li>
+                <li>
+                        <a href="<?php echo Url::to(['/user/sign-in/signup']) ?>" data-method="post">
+                            <span class="glyphicon glyphicon-edit"></span>
+                            &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Sign Up') ?>
+                        </a>
+                </li>
                     <?php endif; ?>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo Url::to(['/sign-in/profile']) ?>"><span
+                        <li><a href="<?php echo Url::to(['/user/sign-in/profile']) ?>"><span
                                         class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Profile</a>
                         </li>
-                        <li><a href="<?php echo Url::to(['/sign-in/account']) ?>"><span
+                        <li><a href="<?php echo Url::to(['/user/sign-in/account']) ?>"><span
                                         class="fa fa-key"></span> &nbsp;&nbsp;Account</a>
                         </li>
                         <li class="divider"></li>
-                        <a href="<?php echo Url::to(['user/sign-in/logout']) ?>" data-method="post">
+                        <a href="<?php echo Url::to(['/user/sign-in/logout']) ?>" data-method="post">
                             <span class="glyphicon glyphicon-off"></span>
-                            &nbsp;&nbsp;<?php echo Yii::t('backend', 'Log out') ?>
+                            &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Log out') ?>
                         </a>
                         </li>
                     </ul>
