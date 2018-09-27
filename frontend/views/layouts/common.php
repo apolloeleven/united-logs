@@ -15,6 +15,7 @@ use yii\log\Logger;
 use yii\widgets\Breadcrumbs;
 
 $bundle = FrontendAsset::register($this);
+$userIdentity = Yii::$app->user->identity;
 
 ?>
 
@@ -28,7 +29,7 @@ $bundle = FrontendAsset::register($this);
             <!--<img src="img/logo/lobiadmin-logo-text-white-32.png" class="hidden-xs" alt="" />-->
         </a>
         <!--Menu show/hide toggle button-->
-        <ul class="nav navbar-nav pull-left show-hide-menu">
+        <ul class="nav navbar-nav pull-left show-hide-menu" <?php echo !$userIdentity ? 'style="display: none"' : '' ?>>
             <li>
                 <a href="#" class="border-radius-0 btn font-size-lg" data-action="show-hide-sidebar">
                     <i class="fa fa-bars"></i>
@@ -39,41 +40,41 @@ $bundle = FrontendAsset::register($this);
             <!--User avatar dropdown-->
             <ul class="nav navbar-nav navbar-right user-actions">
                 <li class="dropdown">
-                    <?php if (Yii::$app->user->identity): ?>
+                    <?php if ($userIdentity): ?>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="<?php echo Yii::$app->user->identity->userProfile->getAvatar($this->assetManager->getAssetUrl($bundle,
+                            <img src="<?php echo $userIdentity->userProfile->getAvatar($this->assetManager->getAssetUrl($bundle,
                                 'img/anonymous.jpg')) ?>"
                                  class="user-avatar">
-                            <span><?php echo Yii::$app->user->identity->username ?> <i class="caret"></i></span>
+                            <span><?php echo $userIdentity->username ?> <i class="caret"></i></span>
                         </a>
                     <?php else: ?>
-                    <li>
-                        <a href="<?php echo Url::to(['/user/sign-in/login']) ?>" data-method="post">
-                            <span class="glyphicon glyphicon-log-in"></span>
-                            &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Log in') ?>
-                        </a>
+                <li>
+                    <a href="<?php echo Url::to(['/user/sign-in/login']) ?>" data-method="post">
+                        <span class="glyphicon glyphicon-log-in"></span>
+                        &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Log in') ?>
+                    </a>
                 </li>
                 <li>
-                        <a href="<?php echo Url::to(['/user/sign-in/signup']) ?>" data-method="post">
-                            <span class="glyphicon glyphicon-edit"></span>
-                            &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Sign Up') ?>
-                        </a>
+                    <a href="<?php echo Url::to(['/user/sign-in/signup']) ?>" data-method="post">
+                        <span class="glyphicon glyphicon-edit"></span>
+                        &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Sign Up') ?>
+                    </a>
                 </li>
-                    <?php endif; ?>
-                    <ul class="dropdown-menu">
-                        <li><a href="<?php echo Url::to(['/user/sign-in/profile']) ?>"><span
-                                        class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Profile</a>
-                        </li>
-                        <li><a href="<?php echo Url::to(['/user/sign-in/account']) ?>"><span
-                                        class="fa fa-key"></span> &nbsp;&nbsp;Account</a>
-                        </li>
-                        <li class="divider"></li>
-                        <a href="<?php echo Url::to(['/user/sign-in/logout']) ?>" data-method="post">
-                            <span class="glyphicon glyphicon-off"></span>
-                            &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Log out') ?>
-                        </a>
-                        </li>
-                    </ul>
+                <?php endif; ?>
+                <ul class="dropdown-menu">
+                    <li><a href="<?php echo Url::to(['/user/sign-in/profile']) ?>"><span
+                                    class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Profile</a>
+                    </li>
+                    <li><a href="<?php echo Url::to(['/user/sign-in/account']) ?>"><span
+                                    class="fa fa-key"></span> &nbsp;&nbsp;Account</a>
+                    </li>
+                    <li class="divider"></li>
+                    <a href="<?php echo Url::to(['/user/sign-in/logout']) ?>" data-method="post">
+                        <span class="glyphicon glyphicon-off"></span>
+                        &nbsp;&nbsp;<?php echo Yii::t('frontend', 'Log out') ?>
+                    </a>
+                    </li>
+                </ul>
                 </li>
             </ul>
         </div>
@@ -96,7 +97,7 @@ $bundle = FrontendAsset::register($this);
         <div class="clearfix"></div>
     </nav>
 
-    <div class="menu">
+    <div class="menu" <?php echo !$userIdentity ? 'style="display: none"' : '' ?>>
         <nav>
             <?php
 
@@ -121,21 +122,9 @@ $bundle = FrontendAsset::register($this);
         </div>
     </div>
 
-    <div id="main">
-        <!--        <div id="ribbon" class="hidden-print">-->
-        <!--            <a href="#dashboard" class="btn-ribbon" data-container="#main" data-toggle="tooltip"-->
-        <!--               data-title="Show dashboard"><i class="fa fa-home"></i></a>-->
-        <!--            <span class="vertical-devider">&nbsp;</span>-->
-        <!--            <button class="btn-ribbon" data-container="#main" data-action="reload" data-toggle="tooltip"-->
-        <!--                    data-title="Reload content by ajax"><i class="fa fa-refresh"></i></button>-->
-        <!--            --><?php //echo Breadcrumbs::widget([
-        //                'homeLink' => false,
-        //                'tag' => 'ol',
-        //                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        //            ]) ?>
-        <!--        </div>-->
+    <div id="main" <?php echo !$userIdentity ? 'style="margin-left: 0;' : '' ?>>
         <div id="content">
-            <h1>
+            <h1 style="text-align: center;">
                 <?php echo $this->title ?>
                 <?php if (isset($this->params['subtitle'])): ?>
                     <small><?php echo $this->params['subtitle'] ?></small>
