@@ -42,11 +42,11 @@ $userIdentity = Yii::$app->user->identity;
 
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo Url::to(['/user/sign-in/profile']) ?>"><span
-                                            class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Profile</a>
+                                            class="glyphicon glyphicon-user"></span><?php echo Yii::t('frontend', 'Profile') ?></a>
                             </li>
                             <li>
                                 <a href="<?php echo Url::to(['/user/sign-in/account']) ?>"><span
-                                            class="fa fa-key"></span> &nbsp;&nbsp;Account</a>
+                                            class="fa fa-key"></span><?php echo Yii::t('frontend', 'Account') ?></a>
                             </li>
                             <li class="divider"></li>
                             <li>
@@ -66,10 +66,10 @@ $userIdentity = Yii::$app->user->identity;
                     <li>
                         <div class="dropdown-menu dropdown-notifications dropdown-timeline notification-news border-1 animated-fast flipInX">
                             <div class="notifications-heading border-bottom-1 bg-white">
-                                <?php echo Yii::t('backend', 'Timeline') ?>
+                                <?php echo Yii::t('frontend', 'Timeline') ?>
                             </div>
                             <div class="notifications-footer border-top-1 bg-white text-center">
-                                <?php echo Html::a(Yii::t('backend', 'View all'), ['/timeline-event/index']) ?>
+                                <?php echo Html::a(Yii::t('frontend', 'View all'), ['/timeline-event/index']) ?>
                             </div>
                         </div>
                     </li>
@@ -89,7 +89,7 @@ $userIdentity = Yii::$app->user->identity;
                     'activeCssClass' => 'opened',
                     'items' => [
                         [
-                            'label' => Yii::t('backend', 'Projects'),
+                            'label' => Yii::t('frontend', 'Projects'),
                             'url' => ['/admin/project/index'],
                             'icon' => 'fa fa-edit'
                         ],
