@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ProjectSubscriber */
@@ -10,13 +11,24 @@ use yii\helpers\Html;
 $this->title = Yii::t('frontend', 'Update {modelClass}: ', [
     'modelClass' => 'Project Subscriber',
 ]) . $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Project Subscribers'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('frontend', 'Update');
+$this->params['breadcrumbs'][] = [
+    'label' => 'Projects',
+    'url' => ['/admin/project']
+];
+$this->params['breadcrumbs'][] = [
+    'label' => $project->name,
+    'url' => Url::to(['/admin/project/view', 'id' => $project->id])
+];
+$this->params['breadcrumbs'][] = [
+    'label' => 'Subscriptions',
+    'url' => Url::to(['/admin/project-subscriber/index', 'id' => $project->id])
+];
+$this->params['breadcrumbs'][] = $model->id;
+
+
 ?>
 <div class="project-subscriber-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'projectLogLevels' => $projectLogLevels,

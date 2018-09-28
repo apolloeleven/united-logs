@@ -12,32 +12,29 @@ use yii\widgets\Breadcrumbs;
 /* @var $projectLogLevels [] */
 /* @var $projectLogEnvironments [] */
 
-echo Breadcrumbs::widget([
-    'itemTemplate' => "<li><i>{link}</i></li>\n", // template for all links
-    'links' => [
-        [
-            'label' => 'Projects',
-            'url' => ['/admin/project']
-        ],
-        [
-            'label' => $project->name,
-            'url' => Url::to(['/admin/project/view', 'id' => $project->id])
-        ],
-        'Subscribers',
-    ],
-]);
+
+$this->title = Yii::t('frontend', 'Subscribers of project: {name}', ['name' =>  $project->name ]);
+$this->params['breadcrumbs'][] = [
+    'label' => 'Projects',
+    'url' => ['/admin/project']
+];
+$this->params['breadcrumbs'][] = [
+    'label' => $project->name,
+    'url' => Url::to(['/admin/project/view', 'id' => $project->id])
+];
+$this->params['breadcrumbs'][] = Yii::t('frontend', 'Subscriptions');
+
 echo Html::a(
     Yii::t('frontend', 'Logs'),
     \yii\helpers\Url::to(['/admin/project-log/index', 'id' => $project->id]),
     [
-        'class' => 'btn btn-primary'
+        'class' => 'btn btn-primary',
+        'style' => 'margin-bottom: 2px'
     ]
 );
 ?>
 <div class="project-subscriber-index">
 
-    <h1><?= $project->name ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
         <?= Html::a(
