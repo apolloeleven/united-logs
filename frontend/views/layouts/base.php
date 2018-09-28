@@ -1,43 +1,13 @@
 <?php
-use frontend\assets\FrontendAsset;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
+/**
+ * @var $this    yii\web\View
+ * @var $content string
+ */
 
-/* @var $this \yii\web\View */
-/* @var $content string */
-
-$bundle = FrontendAsset::register($this);
-
-$this->params['body-class'] = array_key_exists('body-class', $this->params) ?
-    $this->params['body-class']
-    : null;
 ?>
 
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?php echo Yii::$app->language ?>">
-<head>
-    <meta charset="<?php echo Yii::$app->charset ?>">
-    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<?php $this->beginContent('@frontend/views/layouts/clear.php'); ?>
 
-    <?php echo Html::csrfMetaTags() ?>
-    <title><?php echo Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+<?php echo $content ?>
 
-</head>
-<?php echo Html::beginTag('body', [
-    'class' => implode(' ', [
-        ArrayHelper::getValue($this->params, 'body-class'),
-        Yii::$app->keyStorage->get('backend.theme-skin', ''),
-        Yii::$app->keyStorage->get('backend.header-fixed') ? 'header-fixed' : null,
-        Yii::$app->keyStorage->get('backend.menu-fixed') ? 'menu-fixed' : null,
-        Yii::$app->keyStorage->get('backend.ribbon-fixed') ? 'ribbon-fixed' : null,
-    ]),
-    'style' => ArrayHelper::getValue($this->params, 'body-style'),
-])?>
-    <?php $this->beginBody() ?>
-        <?php echo $content ?>
-    <?php $this->endBody() ?>
-<?php echo Html::endTag('body') ?>
-</html>
-<?php $this->endPage() ?>
+<?php $this->endContent(); ?>
