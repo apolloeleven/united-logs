@@ -45,7 +45,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'name',
             'token',
-            'description:ntext',
             [
                 'attribute' => 'Actions',
                 'format' => ['html'],
