@@ -16,9 +16,9 @@ use yii\widgets\Breadcrumbs;
 
 
 //$this->registerAssetBundle('centigen\i18ncontent\AssetBundle');
-$this->title = Yii::t('frontend', 'Logs for project: {name}', ['name' =>  $project->name ]);
+$this->title = Yii::t('frontend', 'Logs for project: {name}', ['name' => $project->name]);
 $this->params['breadcrumbs'][] = [
-    'label' => 'Projects',
+    'label' => Yii::t('frontend', 'Projects'),
     'url' => ['/admin/project']
 ];
 $this->params['breadcrumbs'][] = [
@@ -63,7 +63,7 @@ echo Html::a(Yii::t('frontend', 'Delete'), [null], ['class' => 'btn btn-danger d
                 'format' => ['html'],
                 'filter' => Html::activeDropDownList($searchModel, 'level', $projectLogLevels, [
                     'class' => 'form-control',
-                    'prompt' => '--Select log level--',
+                    'prompt' => Yii::t('frontend', '--Select Log Level--'),
                 ]),
                 'value' => function ($data) {
                     $levels = \common\models\ProjectLog::getLevels();
@@ -87,14 +87,14 @@ echo Html::a(Yii::t('frontend', 'Delete'), [null], ['class' => 'btn btn-danger d
                 'attribute' => 'category',
                 'filter' => Html::activeDropDownList($searchModel, 'category', $projectLogCategories, [
                     'class' => 'form-control',
-                    'prompt' => '--Select a category--',
+                    'prompt' => Yii::t('frontend', '--Select a Category--'),
                 ])
             ],
             [
                 'attribute' => 'environment',
                 'filter' => Html::activeDropDownList($searchModel, 'environment', $projectLogEnvironments, [
                     'class' => 'form-control',
-                    'prompt' => '--Select environment--',
+                    'prompt' => Yii::t('frontend', '--Select Environment--'),
                 ])
             ],
             [

@@ -48,21 +48,21 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'Actions',
                 'format' => ['html'],
-                'value' => function($model){
+                'value' => function ($model) {
                     return Html::a(
-                        Yii::t('frontend', ''),
-                        \yii\helpers\Url::to(['/admin/project-log/index', 'id' => $model->id]),
-                        [
-                            'class' => 'glyphicon glyphicon-book',
-                            'title' => 'Logs',
-                            'style' => 'margin:4px; font-size: 14px;'
-                        ]
-                    ).Html::a(
+                            Yii::t('frontend', ''),
+                            \yii\helpers\Url::to(['/admin/project-log/index', 'id' => $model->id]),
+                            [
+                                'class' => 'glyphicon glyphicon-book',
+                                'title' => Yii::t('frontend', 'Logs'),
+                                'style' => 'margin:4px; font-size: 14px;'
+                            ]
+                        ) . Html::a(
                             Yii::t('frontend', ''),
                             Url::to(['/admin/project-subscriber/index', 'id' => $model->id]),
                             [
                                 'class' => 'glyphicon glyphicon-briefcase',
-                                'title' => 'Subscribers',
+                                'title' => Yii::t('frontend', 'Subscribers'),
                                 'style' => 'margin:4px; font-size: 14px;'
                             ]
                         );

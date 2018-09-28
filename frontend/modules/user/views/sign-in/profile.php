@@ -8,7 +8,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $model common\models\UserProfile */
 /* @var $form yii\bootstrap\ActiveForm */
 
-$this->title = Yii::t('backend', 'Edit profile')
+$this->title = Yii::t('frontend', 'Edit profile')
 ?>
 
 <div class="user-profile-form">

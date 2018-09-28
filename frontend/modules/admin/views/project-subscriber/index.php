@@ -13,9 +13,9 @@ use yii\widgets\Breadcrumbs;
 /* @var $projectLogEnvironments [] */
 
 
-$this->title = Yii::t('frontend', 'Subscribers of project: {name}', ['name' =>  $project->name ]);
+$this->title = Yii::t('frontend', 'Subscribers of project: {name}', ['name' => $project->name]);
 $this->params['breadcrumbs'][] = [
-    'label' => 'Projects',
+    'label' => Yii::t('frontend', 'Projects'),
     'url' => ['/admin/project']
 ];
 $this->params['breadcrumbs'][] = [
@@ -54,7 +54,7 @@ echo Html::a(
                 'attribute' => 'email',
                 'format' => ['html'],
                 'filter' => Html::activeTextInput($searchModel, 'email', [
-                    'placeholder' => '--Please insert an email--',
+                    'placeholder' => Yii::t('frontend', 'Insert an Email'),
                     'class' => 'form-control',
                 ]),
                 'value' => function ($data) {
@@ -75,7 +75,7 @@ echo Html::a(
                 'format' => ['html'],
                 'filter' => Html::activeDropDownList($searchModel, 'level', $projectLogLevels, [
                     'class' => 'form-control',
-                    'prompt' => '--Please select log level--',
+                    'prompt' => Yii::t('frontend', '--Select Log Level--'),
                 ]),
                 'value' => function ($data) {
                     if (!$data->level) {
@@ -105,7 +105,7 @@ echo Html::a(
                 'attribute' => 'category',
                 'format' => ['html'],
                 'filter' => Html::activeTextInput($searchModel, 'category', [
-                    'placeholder' => '--Please insert a category--',
+                    'placeholder' => Yii::t('frontend', '--Insert a Category--'),
                     'class' => 'form-control',
                 ]),
                 'value' => function ($data) {
@@ -125,7 +125,7 @@ echo Html::a(
                 'attribute' => 'environment',
                 'format' => ['html'],
                 'filter' => Html::activeDropDownList($searchModel, 'environment', $projectLogEnvironments, [
-                    'prompt' => '--Please select an environment--',
+                    'prompt' => Yii::t('frontend', '--Select an Environment--'),
                     'class' => 'form-control'
                 ]),
                 'value' => function ($data) {

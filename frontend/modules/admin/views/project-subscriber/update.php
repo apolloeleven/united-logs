@@ -5,14 +5,14 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\ProjectSubscriber */
-/* @var $project common\models\Project*/
+/* @var $project common\models\Project */
 /* @var $projectLogLevels [] */
 
 $this->title = Yii::t('frontend', 'Update {modelClass}: ', [
-    'modelClass' => 'Project Subscriber',
-]) . $model->id;
+        'modelClass' => 'Project Subscriber',
+    ]) . $model->id;
 $this->params['breadcrumbs'][] = [
-    'label' => 'Projects',
+    'label' => Yii::t('frontend', 'Projects'),
     'url' => ['/admin/project']
 ];
 $this->params['breadcrumbs'][] = [
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = [
     'url' => Url::to(['/admin/project/view', 'id' => $project->id])
 ];
 $this->params['breadcrumbs'][] = [
-    'label' => 'Subscriptions',
+    'label' => Yii::t('frontend', 'Subscriptions'),
     'url' => Url::to(['/admin/project-subscriber/index', 'id' => $project->id])
 ];
 $this->params['breadcrumbs'][] = $model->id;

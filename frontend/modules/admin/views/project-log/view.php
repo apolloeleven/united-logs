@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 $this->title = $model->id;
 $this->title = Yii::t('frontend', 'Logs for project: {name}', ['name' => $model->project->name]);
 $this->params['breadcrumbs'][] = [
-    'label' => 'Projects',
+    'label' => Yii::t('frontend', 'Projects'),
     'url' => ['/admin/project']
 ];
 $this->params['breadcrumbs'][] = [
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = [
     'url' => Url::to(['/admin/project/view', 'id' => $model->project->id])
 ];
 $this->params['breadcrumbs'][] = [
-    'label' => 'Logs',
+    'label' => Yii::t('frontend', 'Logs'),
     'url' => Url::to(['/admin/project-log/index', 'id' => $model->project->id])
 ];
 

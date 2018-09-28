@@ -10,9 +10,9 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('frontend', 'Projects'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $imageUrl = null;
-if($model->getImageAbsoluteUrl()){
+if ($model->getImageAbsoluteUrl()) {
     $imageUrl = $model->getImageAbsoluteUrl();
-}else{
+} else {
     $imageUrl = '@web/img/project-no-image-image.png';
 }
 
@@ -34,7 +34,7 @@ if($model->getImageAbsoluteUrl()){
         'model' => $model,
         'attributes' => [
             [
-                'label' => 'Image',
+                'label' => Yii::t('frontend', 'Image'),
                 'format' => ['html'],
                 'value' => Html::img($imageUrl, [
                     'class' => 'img-responsive'
