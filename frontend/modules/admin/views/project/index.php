@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             Yii::t('frontend', ''),
                             Url::to(['/admin/project-subscriber/index', 'id' => $model->id]),
                             [
-                                'class' => 'glyphicon glyphicon-briefcase',
+                                'class' => 'glyphicon glyphicon-user',
                                 'title' => Yii::t('frontend', 'Subscribers'),
                                 'style' => 'margin:4px; font-size: 14px;'
                             ]
