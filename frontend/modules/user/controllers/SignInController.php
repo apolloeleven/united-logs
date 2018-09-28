@@ -89,6 +89,7 @@ class SignInController extends \yii\web\Controller
      */
     public function actionLogin()
     {
+        $this->layout = '@frontend/views/layouts/base';
         $model = new LoginForm();
         if (Yii::$app->request->isAjax) {
             $model->load($_POST);
@@ -110,7 +111,7 @@ class SignInController extends \yii\web\Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->goHome();
+        return $this->redirect(['/user/sign-in/login']);
     }
 
     /**
