@@ -71,6 +71,16 @@ class ProjectLog extends \yii\db\ActiveRecord
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'updatedAtAttribute' => false
+            ]
+        ];
+    }
+
     /**
      * @return Behavior[]
      */

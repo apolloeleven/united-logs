@@ -257,7 +257,7 @@ class Project extends \yii\db\ActiveRecord
      */
     public function getImageAbsoluteUrl(){
         if($this->image){
-            return getenv('STORAGE_URL').'/source/project/'.$this->image;
+            return Yii::getAlias('@storageUrl/source/project/'.$this->image);
         }
         return null;
     }
